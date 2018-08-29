@@ -5,4 +5,4 @@
 此项目主要依赖了ws4py以及unittest等第三方，用户自行安装引用。# user_api_demo_py
 
 ###地址
-https://github.com/liqiangqiang-test/user_api_demo_py.git
+https://github.com/zbg-user-api-demo/user_api_demo_py.git
