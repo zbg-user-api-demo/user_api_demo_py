@@ -76,40 +76,28 @@ def get_currency_list():
 
 # 增加委托单，也就是下单接口
 def add_entrust(market_name, amount, price, range_type, entrust_type):
-    market_id = get_market_id_by_name(market_name)
-    if not market_id:
-        raise CustomError(market_name + '市场不存在')
-    params = {'marketId': market_id, 'amount': amount, 'price': price, 'rangeType': range_type, 'type': entrust_type}
+    params = {'marketName': market_name, 'amount': amount, 'price': price, 'rangeType': range_type, 'type': entrust_type}
     status, result = signed_request_post(config_params.EXCHANGE_HOST + config_params.API_ADD_ENTRUST, **params)
     return status, result
 
 
 # 取消委托单接口
 def cancle_entrust(market_name, entrust_id):
-    market_id = get_market_id_by_name(market_name)
-    if not market_id:
-        raise CustomError(market_name + '市场不存在')
-    params = {'marketId': market_id, 'entrustId': entrust_id}
+    params = {'marketName': market_name, 'entrustId': entrust_id}
     status, result = signed_request_post(config_params.EXCHANGE_HOST + config_params.API_CANCEL_ENTRUST, **params)
     return status, result
 
 
 # 根据id获取委托单信息
 def get_entrust_by_id(market_name, entrust_id):
-    market_id = get_market_id_by_name(market_name)
-    if not market_id:
-        raise CustomError(market_name + '市场不存在')
-    params = {'marketId': market_id, 'entrustId': entrust_id}
+    params = {'marketName': market_name, 'entrustId': entrust_id}
     status, result = signed_request_get(config_params.EXCHANGE_HOST + config_params.API_USER_ENTRUST_BY_ID, **params)
     return status, result
 
 
 # 获取用户待撮合、委托记录
 def get_user_entrust_from_cache_with_page(market_name, page_index, page_size):
-    market_id = get_market_id_by_name(market_name)
-    if not market_id:
-        raise CustomError(market_name + '市场不存在')
-    params = {'marketId': market_id, 'pageIndex': page_index, 'pageSize': page_size}
+    params = {'marketName': market_name, 'pageIndex': page_index, 'pageSize': page_size}
     status, result = signed_request_get(config_params.EXCHANGE_HOST
                                         + config_params.API_GET_USER_ENTRUST_FROM_CACHE_WITH_PAGE, **params)
     return status, result
@@ -117,10 +105,7 @@ def get_user_entrust_from_cache_with_page(market_name, page_index, page_size):
 
 # 获取用户待撮合、委托记录
 def get_user_entrust_from_cache(market_name):
-    market_id = get_market_id_by_name(market_name)
-    if not market_id:
-        raise CustomError(market_name + '市场不存在')
-    params = {'marketId': market_id}
+    params = {'marketName': market_name}
     status, result = signed_request_get(config_params.EXCHANGE_HOST
                                         + config_params.API_GET_USER_ENTRUST_FROM_CACHE, **params)
     return status, result
@@ -128,10 +113,7 @@ def get_user_entrust_from_cache(market_name):
 
 # 获取用户待撮合、已成交、部分成交、已取消、取消中的委托记录
 def get_user_entrust_list(market_name, page_index, page_size, type_param, status_param, start_date_time, end_date_time):
-    market_id = get_market_id_by_name(market_name)
-    if not market_id:
-        raise CustomError(market_name + '市场不存在')
-    params = {'marketId': market_id, 'pageIndex': page_index, 'pageSize': page_size}
+    params = {'marketName': market_name, 'pageIndex': page_index, 'pageSize': page_size}
     if type_param is not None:
         params['type'] = type_param
     if status_param is not None:
