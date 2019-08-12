@@ -80,6 +80,11 @@ def add_entrust(market_name, amount, price, range_type, entrust_type):
     status, result = signed_request_post(config_params.EXCHANGE_HOST + config_params.API_ADD_ENTRUST, **params)
     return status, result
 
+# 取消委托单接口,entrustIds 可不传，type可不传，marketName必传
+def batch_cancle_entrust(market_name, entrustIds, type):
+    params = {'marketName': market_name, 'entrustIds': ['E6566615039636152320','E6566615034850451456'], 'type':type}
+    status, result = signed_request_post(config_params.EXCHANGE_HOST + "/exchange/entrust/controller/website/EntrustController/cancelEntrustMore", **params)
+    return status, result
 
 # 取消委托单接口
 def cancle_entrust(market_name, entrust_id):
